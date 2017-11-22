@@ -10,6 +10,7 @@
 /ObligatorioRamaSeoane/roi.planner/nbproject/private/
 /ObligatorioRamaSeoane/roi.planner/roi.planner-war/nbproject/private/
 /ObligatorioRamaSeoane/roi.planner/roi.planner-ejb/nbproject/private/
+<<<<<<< HEAD
 /ObligatorioRamaSeoane/roi.planner/roi.planner-ejb/build/
 /ObligatorioRamaSeoane/roi.planner/roi.planner-war/build/
 /ObligatorioRamaSeoane/roi.planner/roi.planner-ejb/dist/
@@ -24,3 +25,9 @@
 /ObligatorioRamaSeoane/roiPlanner/build/
 /ObligatorioRamaSeoane/roiPlanner/roiPlanner-war/dist/
 /ObligatorioRamaSeoane/roiPlanner/dist/
+=======
+/ObligatorioRamaSeoane/roi.supplying/roi.supplying-war/build/
+/ObligatorioRamaSeoane/roi.supplying/roi.supplying-ejb/dist/
+/ObligatorioRamaSeoane/roi.supplying/roi.supplying-ejb/build/
+/ObligatorioRamaSeoane/roi.supplying/roi.supplying-war/dist/
+>>>>>>> c1246366e6b1b208a0e72ef1b525b97b2c073ded
