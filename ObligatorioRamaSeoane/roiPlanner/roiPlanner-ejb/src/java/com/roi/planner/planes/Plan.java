@@ -19,16 +19,26 @@ import javax.persistence.Table;
 public class Plan implements Serializable {
     public Plan(){
        this.isApproved = false;
+       this.isCanceled = false;
    } 
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
    private Long ID;
    private boolean isApproved;
+   private boolean isCanceled;
    private int idOrder;
    private int numberPlan;
    
    @OneToMany(cascade = CascadeType.PERSIST)
    private List<Stretch> stretches  = new ArrayList<>();
+
+    public boolean isIsCanceled() {
+        return isCanceled;
+    }
+
+    public void setIsCanceled(boolean isCanceled) {
+        this.isCanceled = isCanceled;
+    }
 
    
    

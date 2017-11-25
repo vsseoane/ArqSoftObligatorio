@@ -42,7 +42,8 @@ public class PlanBean {
          try{
             Plan plan = find(order.getOrderNumber()).get(0);
             if(plan != null){
-                 delete(plan);
+                 plan.setIsCanceled(true);
+                 update(plan);
             }else{
                  throw new OrderNotFoundException();
             }
