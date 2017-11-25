@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Table(name = "Plans")
 public class Plan implements Serializable {
     public Plan(){
-       
+       this.isApproved = false;
    } 
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
