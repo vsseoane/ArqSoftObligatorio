@@ -35,7 +35,7 @@ public class PlanController {
    @EJB
     public PlanBean planBean;
     
-    @GET
+   @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJson() {
          try {
@@ -47,7 +47,7 @@ public class PlanController {
             return Response.status(Response.Status.BAD_REQUEST).entity("Hubo un error al realizar su solicitud").build();
         }
     }
-
+/*
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
@@ -61,7 +61,7 @@ public class PlanController {
         } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Hubo un error al realizar su solicitud").build();
         } 
-    }
+    }*/
 
     
 }

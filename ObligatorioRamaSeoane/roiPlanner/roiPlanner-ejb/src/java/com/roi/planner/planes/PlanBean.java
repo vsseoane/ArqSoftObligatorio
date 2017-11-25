@@ -15,23 +15,64 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ejb.EJB;
 
 
 
 @Stateless
 @LocalBean
 public class PlanBean {
- @PersistenceContext
-    private EntityManager em;
+
+    @PersistenceContext
+    protected EntityManager em;
+   
     private Gson gson = new Gson();
    
     public List<Plan> getPlans() {
           
         return em.createNativeQuery("select * from Plans ",Plan.class).getResultList();
     }
-    public Plan createPlan(Plan plan) {
+    public void createPlanFromOrder(Order order) {
+        Plan plan = new Plan();
+        plan.setIdOrder(order.getOrderNumber());
+        plan.setStretches(getStretches());
+        addPlan(plan);       
+    }
+    public void deletePlanFromOrder(Order order)throws OrderNotFoundException{
+         try{
+            Plan plan = find(order.getOrderNumber()).get(0);
+            if(plan != null){
+                 delete(plan);
+            }else{
+                 throw new OrderNotFoundException();
+            }
+           
+        }catch(OrderNotFoundException e){
+            throw new OrderNotFoundException();
+        }
+    }
+    public void updatePlanFromOrder(Order order) throws OrderNotFoundException{
+        try{
+            Plan plan = find(order.getOrderNumber()).get(0);
+            update(plan);
+        }catch(OrderNotFoundException e){
+            throw new OrderNotFoundException();
+        }        
+    }
+    public List<Plan> find(int id) throws OrderNotFoundException{
+        return em.createNativeQuery("select * from Plans where IDORDER="+ id,Plan.class).getResultList();
+    }
+         
+         
+    public void addPlan(Plan plan){
         em.persist(plan);
-        return plan;
+    }
+
+     public void update(Plan plan) {
+        em.merge(plan);
+    }
+    public void delete(Plan plan) {
+           em.remove(plan);
     }
     public List<Stretch> getStretches(){
         try{
