@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import com.roi.planner.planes.PlanBean;
+import com.roi.planner.planes.PlanNotFoundException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,6 +20,8 @@ import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.List;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 @Path("plan")
@@ -47,21 +50,19 @@ public class PlanController {
             return Response.status(Response.Status.BAD_REQUEST).entity("Hubo un error al realizar su solicitud").build();
         }
     }
-/*
+
 
     @PUT
+    @Path("/approvePlan")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response putJson(String jsonPlan)  {
+    public Response approvePlan(@HeaderParam("id") int id)  {
         try {
-           Gson gson = new Gson();
-           Plan plan = gson.fromJson(jsonPlan, Plan.class);
-           plan.setStretches(planBean.getStretches());
-            Plan createdPlan = planBean.createPlan(plan);
+            planBean.approvePlan(id);
            return Response.status(Response.Status.OK).build(); 
+        }catch(PlanNotFoundException e){
+            return Response.status(Response.Status.NOT_FOUND).entity("No existe ese plan").build();
         } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Hubo un error al realizar su solicitud").build();
         } 
-    }*/
-
-    
+    }
 }

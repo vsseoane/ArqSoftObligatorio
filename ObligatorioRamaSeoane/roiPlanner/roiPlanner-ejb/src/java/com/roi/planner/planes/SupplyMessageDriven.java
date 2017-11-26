@@ -1,7 +1,6 @@
 package com.roi.planner.planes;
 
 import com.google.gson.Gson;
-import com.roi.planner.planes.dto.RequestDTO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.ActivationConfigProperty;

@@ -40,7 +40,7 @@ public class PlanBean {
     }
     public void deletePlanFromOrder(Order order)throws OrderNotFoundException{
          try{
-            Plan plan = find(order.getOrderNumber()).get(0);
+            Plan plan = findOrder(order.getOrderNumber()).get(0);
             if(plan != null){
                  plan.setIsCanceled(true);
                  update(plan);
@@ -54,16 +54,25 @@ public class PlanBean {
     }
     public void updatePlanFromOrder(Order order) throws OrderNotFoundException{
         try{
-            Plan plan = find(order.getOrderNumber()).get(0);
+            Plan plan = findOrder(order.getOrderNumber()).get(0);
             update(plan);
         }catch(OrderNotFoundException e){
             throw new OrderNotFoundException();
         }        
     }
-    public List<Plan> find(int id) throws OrderNotFoundException{
-        return em.createNativeQuery("select * from Plans where IDORDER="+ id,Plan.class).getResultList();
+    public List<Plan> findOrder(int id) throws OrderNotFoundException{
+        return em.createNativeQuery("select * from PLAN where IDORDER="+ id,Plan.class).getResultList();
     }
-         
+    public Plan find(int id) throws OrderNotFoundException{
+       try{
+        Plan plan =  (Plan)em.createNativeQuery("select * from Plans where ID="+ id,Plan.class).getResultList().get(0);
+        return plan;
+       }catch(Exception e){
+           throw new OrderNotFoundException();
+       }
+    }
+    
+        
          
     public void addPlan(Plan plan){
         em.persist(plan);
@@ -96,6 +105,15 @@ public class PlanBean {
             throw e;
         }
     }
-   
+    public void approvePlan(int idPlan) throws PlanNotFoundException{
+        try{
+            Plan plan = find(idPlan);
+            plan.setIsApproved(true);
+            update(plan);
+        }catch(OrderNotFoundException e){
+            throw new PlanNotFoundException();
+        }
+        
+    }
     
 }

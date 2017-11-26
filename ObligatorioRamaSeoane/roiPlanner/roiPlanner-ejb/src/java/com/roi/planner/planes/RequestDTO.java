@@ -1,4 +1,4 @@
-package com.roi.planner.planes.dto;
+package com.roi.planner.planes;
 
 import com.roi.planner.planes.Order;
 import java.io.Serializable;

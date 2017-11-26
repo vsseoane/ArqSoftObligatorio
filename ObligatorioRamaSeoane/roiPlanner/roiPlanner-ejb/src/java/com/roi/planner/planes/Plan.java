@@ -59,7 +59,7 @@ public class Plan implements Serializable {
     }
 
 
-    public boolean isIsApproved() {
+    public boolean getIsApproved() {
         return isApproved;
     }
 
