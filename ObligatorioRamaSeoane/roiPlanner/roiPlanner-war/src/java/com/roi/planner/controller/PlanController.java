@@ -50,7 +50,19 @@ public class PlanController {
             return Response.status(Response.Status.BAD_REQUEST).entity("Hubo un error al realizar su solicitud").build();
         }
     }
-
+    @GET
+    @Path("/programmer")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPlanFromProgrammer() {
+         try {
+            final List<Plan> plans = planBean.getPlansFromProgrammer();
+            Gson gson = new Gson();
+            final String JSONRepresentation = gson.toJson(plans);
+            return Response.status(Response.Status.OK).entity(JSONRepresentation).build(); 
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Hubo un error al realizar su solicitud").build();
+        }
+    }
 
     @PUT
     @Path("/approvePlan")
@@ -65,4 +77,18 @@ public class PlanController {
             return Response.status(Response.Status.BAD_REQUEST).entity("Hubo un error al realizar su solicitud").build();
         } 
     }
+    @PUT
+    @Path("/secondApprovePlan")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response secondApprovePlan(@HeaderParam("id") int id)  {
+        try {
+            planBean.secondApprovePlan(id);
+           return Response.status(Response.Status.OK).build(); 
+        }catch(PlanNotFoundException e){
+            return Response.status(Response.Status.NOT_FOUND).entity("No existe ese plan").build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Hubo un error al realizar su solicitud").build();
+        } 
+    }
+    
 }

@@ -16,6 +16,7 @@ public class ApplicationConfig extends Application {
 
     
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(com.roi.planner.controller.ActuatorProgrammingController.class);
         resources.add(com.roi.planner.controller.PlanController.class);
     }
     

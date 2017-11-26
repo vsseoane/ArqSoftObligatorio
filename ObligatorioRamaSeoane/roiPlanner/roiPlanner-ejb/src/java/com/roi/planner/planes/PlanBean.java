@@ -32,6 +32,11 @@ public class PlanBean {
           
         return em.createNativeQuery("select * from Plans ",Plan.class).getResultList();
     }
+     public List<Plan> getPlansFromProgrammer() {
+        int approved = 1;
+        return em.createNativeQuery("select * from Plans as p where p.ISAPPROVED=" + approved,Plan.class).getResultList();
+    }
+    
     public void createPlanFromOrder(Order order) {
         Plan plan = new Plan();
         plan.setIdOrder(order.getOrderNumber());
@@ -114,6 +119,15 @@ public class PlanBean {
             throw new PlanNotFoundException();
         }
         
+    }
+    public void secondApprovePlan(int idPlan) throws PlanNotFoundException{
+        try{
+            Plan plan = find(idPlan);
+            plan.setIsSecondApproved(true);
+            update(plan);
+        }catch(OrderNotFoundException e){
+            throw new PlanNotFoundException();
+        }
     }
     
 }
