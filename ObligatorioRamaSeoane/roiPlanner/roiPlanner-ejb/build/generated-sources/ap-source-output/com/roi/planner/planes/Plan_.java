@@ -6,10 +6,11 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-11-26T17:49:43")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-11-27T15:42:56")
 @StaticMetamodel(Plan.class)
 public class Plan_ { 
 
+    public static volatile SingularAttribute<Plan, Boolean> isSecondApproved;
     public static volatile SingularAttribute<Plan, Integer> idOrder;
     public static volatile SingularAttribute<Plan, Boolean> isCanceled;
     public static volatile ListAttribute<Plan, Stretch> stretches;

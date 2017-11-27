@@ -24,8 +24,8 @@ public class Stretch implements Serializable {
     private String sourceId;    
     
     @ManyToOne(cascade = CascadeType.PERSIST)
-    //@JoinColum(name="")
-    private Plan plan;
+     private Plan plan;
+    
     
 
     public Stretch() {

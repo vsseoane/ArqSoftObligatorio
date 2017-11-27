@@ -56,24 +56,6 @@ public class ActuatorProgrammingBean {
         }
     }
     public boolean isTypeValid(CommandValue aCommandValue){
-       /* Command command = findCommand(aCommandValue.getCommand());
-        boolean isValid = false;
-        if(command.getTypeValueCommand().equals("String")){
-            isValid =  aCommandValue.getValue() instanceof String;
-        }
-        else if(command.getTypeValueCommand().equals("double")){
-            isValid =  aCommandValue.getValue() instanceof Double;
-         }
-         else if(command.getTypeValueCommand().equals("long")){
-            isValid =  aCommandValue.getValue() instanceof long;
-         }
-         else if(command.getTypeValueCommand().equals("datetime")){
-            isValid =  aCommandValue.getValue() instanceof datetime;
-         }else{
-             isValid = false;
-         }
-        
-        return isValid;*/
        return true;
     }
     public boolean existActuator(String actuatorId){

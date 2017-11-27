@@ -1,6 +1,7 @@
 package com.roi.planner.controller;
 
 import com.google.gson.Gson;
+import com.roi.planner.planes.NotExistFirstApprovedException;
 import com.roi.planner.planes.Plan;
 import javax.ejb.EJB;
 import javax.ws.rs.core.Context;
@@ -86,7 +87,9 @@ public class PlanController {
            return Response.status(Response.Status.OK).build(); 
         }catch(PlanNotFoundException e){
             return Response.status(Response.Status.NOT_FOUND).entity("No existe ese plan").build();
-        } catch (Exception e) {
+         }catch(NotExistFirstApprovedException e){
+            return Response.status(Response.Status.NOT_FOUND).entity("Falta la primera aprobación").build();
+        }catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Hubo un error al realizar su solicitud").build();
         } 
     }

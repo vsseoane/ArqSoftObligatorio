@@ -2,6 +2,9 @@
 package com.roi.planner.planes;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
+import com.roi.planner.programmer.ActuatorProgramming;
+import com.roi.planner.programmer.ActuatorProgrammingRequest;
+import com.roi.planner.programmer.RestBean;
 import com.roi.planner.stretches.Stretch;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,12 +28,14 @@ public class PlanBean {
 
     @PersistenceContext
     protected EntityManager em;
-   
+    
+    @EJB
+    private RestBean restBean;
     private Gson gson = new Gson();
    
     public List<Plan> getPlans() {
           
-        return em.createNativeQuery("select * from Plans ",Plan.class).getResultList();
+        return em.createNativeQuery("select * from Plans",Plan.class).getResultList();
     }
      public List<Plan> getPlansFromProgrammer() {
         int approved = 1;
@@ -120,14 +125,30 @@ public class PlanBean {
         }
         
     }
-    public void secondApprovePlan(int idPlan) throws PlanNotFoundException{
+    public void secondApprovePlan(int idPlan) throws PlanNotFoundException,NotExistFirstApprovedException{
         try{
             Plan plan = find(idPlan);
-            plan.setIsSecondApproved(true);
+            if(plan.getIsApproved()){
+                plan.setIsSecondApproved(true);
+                sendCommandsToGoliath(plan);
+            }else{
+                throw new NotExistFirstApprovedException(); 
+            }          
             update(plan);
         }catch(OrderNotFoundException e){
             throw new PlanNotFoundException();
         }
+    }
+    public void sendCommandsToGoliath(Plan plan){
+        
+        List<ActuatorProgramming> actuatorProgramming = em.createNativeQuery("select * from ActuatorProgramming",ActuatorProgramming.class).getResultList();
+        ActuatorProgrammingRequest request = new ActuatorProgrammingRequest();
+        request.setIdPlan(plan.getID());
+        request.setActuatorProgamming(actuatorProgramming);
+        restBean.postMethod("https://requestb.in/x12q7mx1", request);
+        
+        
+        
     }
     
 }

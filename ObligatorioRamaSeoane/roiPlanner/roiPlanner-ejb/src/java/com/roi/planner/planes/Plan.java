@@ -25,6 +25,7 @@ public class Plan implements Serializable {
    @GeneratedValue(strategy = GenerationType.AUTO)
    private Long ID;
    private boolean isApproved;
+    private boolean isSecondApproved;
    private boolean isCanceled;
    private int idOrder;
    private int numberPlan;
@@ -38,6 +39,14 @@ public class Plan implements Serializable {
 
     public void setIsCanceled(boolean isCanceled) {
         this.isCanceled = isCanceled;
+    }
+
+    public boolean isIsSecondApproved() {
+        return isSecondApproved;
+    }
+
+    public void setIsSecondApproved(boolean isSecondApproved) {
+        this.isSecondApproved = isSecondApproved;
     }
 
    
@@ -69,6 +78,10 @@ public class Plan implements Serializable {
 
     public int getIdOrder() {
         return idOrder;
+    }
+
+    public boolean isIsApproved() {
+        return isApproved;
     }
 
     public void setIdOrder(int idOrder) {
