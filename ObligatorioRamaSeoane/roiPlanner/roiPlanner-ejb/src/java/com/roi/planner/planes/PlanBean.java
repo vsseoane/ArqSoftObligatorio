@@ -33,6 +33,10 @@ public class PlanBean {
     private RestBean restBean;
     private Gson gson = new Gson();
    
+    
+    public PlanBean(){
+        String something = "";
+    }
     public List<Plan> getPlans() {
           
         return em.createNativeQuery("select * from Plans",Plan.class).getResultList();

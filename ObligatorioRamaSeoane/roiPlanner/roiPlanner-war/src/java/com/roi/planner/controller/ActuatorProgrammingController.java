@@ -31,20 +31,20 @@ public class ActuatorProgrammingController {
     private Gson gson;
     @Context
     private UriInfo context;
-    
 
     public ActuatorProgrammingController() {
-        gson = new Gson();
+        gson = new Gson();       
     }
     
     @EJB
     public ActuatorProgrammingBean actuatorProgrammingBean;
-    
+      
     @PUT
     @Path("/commands")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response programming(String jsonOrder)  {
+    public Response programming(String jsonOrder,@HeaderParam("token") String token)  {
         try {
+           
             ActuatorProgramming actuator = gson.fromJson(jsonOrder, ActuatorProgramming.class);
             this.actuatorProgrammingBean.actuatorProgramming(actuator);
             return Response.status(Response.Status.OK).build(); 

@@ -18,7 +18,7 @@ import javax.jms.ObjectMessage;
 })
 public class SupplyMessageDriven implements MessageListener {
     @EJB
-    private PlanBean pleanBean;
+    private PlanBean planBean;
     
     public SupplyMessageDriven() {
     }
@@ -33,13 +33,13 @@ public class SupplyMessageDriven implements MessageListener {
             Order order = requestDTO.getOrder();
             String action = requestDTO.getMessage();
             if(action.equals("CREATE")){
-                pleanBean.createPlanFromOrder(order);
+                planBean.createPlanFromOrder(order);
             }
             if(action.equals("UPDATE")){
-                pleanBean.updatePlanFromOrder(order);
+                planBean.updatePlanFromOrder(order);
             }
             if(action.equals("DELETE")){
-                pleanBean.deletePlanFromOrder(order);
+                planBean.deletePlanFromOrder(order);
             }
         } catch (Exception ex) {
             Logger.getLogger(SupplyMessageDriven.class.getName()).log(Level.SEVERE, null, ex);

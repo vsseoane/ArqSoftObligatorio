@@ -10,11 +10,12 @@ import javax.persistence.PersistenceContext;
 @Stateless
 @LocalBean
 public class ApplicationBean {
-    @PersistenceContext
+   @PersistenceContext
     protected EntityManager em;
     
     public boolean HasPermission(String token1, String token2){
         boolean hasPermission = false;
+        
         try{
             AppAuth app1 = (AppAuth)em.createNativeQuery("select * from AppAuth where token='"
                     + token1 + "'",AppAuth.class).getResultList().get(0);

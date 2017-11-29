@@ -1,5 +1,5 @@
 
-package com.roi.planner.programmer;
+package com.supplying.Authentication;
 
 import com.google.gson.Gson;
 import java.io.BufferedReader;
@@ -15,13 +15,18 @@ import javax.ws.rs.core.Response;
 
 @Stateless
 @LocalBean
-public class RestBean {
-    public Response postMethod(String completeUrl, ActuatorProgrammingRequest request) {
+public class RestAuthenticationBean {
+    
+    public boolean postMethod(String token1, String token2, String completeUrl) {
+        AuthDTO auth = new AuthDTO();
+        auth.setToken1(token1);
+        auth.setToken2(token2);
+        
         URL url;
         Gson gson = new Gson();
         HttpURLConnection conn = null;
-        String json = gson.toJson(request);
-        int response = HttpURLConnection.HTTP_CREATED;
+        String json = gson.toJson(auth);
+        String response = "";
         try {
 
             url = new URL(completeUrl);
@@ -30,15 +35,15 @@ public class RestBean {
             conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
 
             conn.setRequestMethod("POST");
-         //   conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Content-Type", "application/json");
 
          //connection.connect();       
             String input = json;
 
             OutputStream os = conn.getOutputStream();
             os.write(input.getBytes());
-            os.flush();
-            response = conn.getResponseCode();
+            os.flush(); 
+            response = conn.getResponseMessage();
             BufferedReader br = new BufferedReader(new InputStreamReader(
              (conn.getInputStream())));
 
@@ -56,10 +61,14 @@ public class RestBean {
 
         } finally {
             conn.disconnect();
-            return Response
-                    .status(response)
-                    .entity(gson.toJson(""))
-                    .build();
+            if(response.equals("OK")){
+                return true;
+            }else{
+                return false;
+            }
+            
+            
+            
 
         }
 
