@@ -132,7 +132,7 @@ public class OrderController {
     public Response delete(@HeaderParam("id") int id) {
            try{
                 this.orderBean.delete(id);
-                return Response.status(Response.Status.OK).entity("DeleteAuthor").build();   
+                return Response.status(Response.Status.OK).entity("DeleteOrder").build();   
           
             } catch(OrderNotFoundException e){
                 Logger.getLogger(OrderController.class.getName()).log(Level.SEVERE, null, e);
