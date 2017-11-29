@@ -16,6 +16,7 @@ public class ApplicationConfig extends Application {
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(com.roi.supplying.orders.OrderController.class);
+        resources.add(com.supplying.Controllers.OrderController.class);
     }
     
 }

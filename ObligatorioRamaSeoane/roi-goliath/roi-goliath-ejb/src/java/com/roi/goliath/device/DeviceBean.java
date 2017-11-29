@@ -10,8 +10,8 @@ import javax.persistence.PersistenceContext;
 @LocalBean
 public class DeviceBean {
 
-    //private static final Logger LOG = LoggerFactory.getLogger
-    //(DeviceBean.class);
+
+    private static final Logger LOG = LoggerFactory.getLogger(DeviceBean.class);
 
     @PersistenceContext
     private EntityManager em;
@@ -28,8 +28,8 @@ public class DeviceBean {
         return device;
     }
 
-    public void executeCommand(DeviceScheduleDto deviceCommandDto) {
-        //LOG.debug("Executing command!");
+    public void ExecuteCommand(DeviceScheduleDto deviceCommandDto) {
+        LOG.debug("Executing command!");
         // get device from the DB
         Device device = this.findDeviceById(deviceCommandDto.getActuatorId());
         // obtain library proxy
