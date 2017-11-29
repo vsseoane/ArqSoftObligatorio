@@ -8,14 +8,12 @@ import javax.persistence.Id;
 
 @Entity
 public class CommandValue implements Serializable {
-
- //   private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String command;
-    private String value;
+    private String valueCommand;
 
     public Long getId() {
         return id;
@@ -34,10 +32,10 @@ public class CommandValue implements Serializable {
     }
 
     public String getValue() {
-        return value;
+        return valueCommand;
     }
 
     public void setValue(String value) {
-        this.value = value;
+        this.valueCommand = value;
     }
 }

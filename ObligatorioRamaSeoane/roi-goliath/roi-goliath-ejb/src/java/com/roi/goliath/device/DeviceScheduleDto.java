@@ -4,10 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Alejandro
- */
 public class DeviceScheduleDto implements Serializable {
 
     private String actuatorId;
@@ -34,7 +30,7 @@ public class DeviceScheduleDto implements Serializable {
         this.commands = commands;
     }
 
-    public List<String> GetCommandsToExecute() {
+    public List<String> getCommandsToExecute() {
         List<String> commandsToExecute = new ArrayList<>();
         for (int i = 0; i < this.commands.size(); i++) {
             CommandValue cmd = this.commands.get(i);

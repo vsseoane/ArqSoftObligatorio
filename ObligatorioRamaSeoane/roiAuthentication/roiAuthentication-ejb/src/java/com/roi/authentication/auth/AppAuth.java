@@ -11,24 +11,26 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class AppAuth implements Serializable{
-     public AppAuth(){
-   } 
-   @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
-   private Long ID;
+public class AppAuth implements Serializable {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
     private String token;
-    @JoinTable(name="APPLICATION_PERMISSIONS")
+    @JoinTable(name = "APPLICATION_PERMISSIONS")
     @ManyToMany()
     private List<AppAuth> hasAccessTo;
+    
+    public AppAuth() {
+    } 
 
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
 
@@ -51,12 +53,15 @@ public class AppAuth implements Serializable{
     public String getName() {
         return name;
     }
+    
     public void setName(String name) {
         this.name = name;
     }
+    
     public List<AppAuth> getAccessTo() {
         return hasAccessTo;
     }
+    
     public void setAccessTo(List<AppAuth> accessTo) {
         this.hasAccessTo = accessTo;
     }

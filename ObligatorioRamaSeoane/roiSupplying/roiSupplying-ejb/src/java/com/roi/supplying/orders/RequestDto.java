@@ -1,8 +1,8 @@
-package com.supplying.orders;
+package com.roi.supplying.orders;
 
 import java.io.Serializable;
 
-public class RequestDTO implements Serializable  {
+public class RequestDto implements Serializable  {
     Order order;
     String message;
 

@@ -6,13 +6,8 @@ import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- *
- * @author Alejandro
- */
 public class DeviceLibraryProxy {
 
     public static final String DEVICE_LIBRARY_EXEC_METHOD = "execute";

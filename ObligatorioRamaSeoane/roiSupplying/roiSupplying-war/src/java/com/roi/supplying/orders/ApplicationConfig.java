@@ -1,8 +1,8 @@
-
-package com.roi.planner.controller;
+package com.roi.supplying.orders;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
+
 
 @javax.ws.rs.ApplicationPath("")
 public class ApplicationConfig extends Application {
@@ -14,10 +14,8 @@ public class ApplicationConfig extends Application {
         return resources;
     }
 
-    
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(com.roi.planner.controller.ActuatorProgrammingController.class);
-        resources.add(com.roi.planner.controller.PlanController.class);
+        resources.add(com.roi.supplying.orders.OrderController.class);
     }
     
 }

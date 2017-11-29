@@ -1,4 +1,4 @@
-package com.roi.authentication.controllers;
+package com.roi.authentication.auth;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
@@ -14,7 +14,7 @@ public class ApplicationConfig extends Application {
     }
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(com.roi.authentication.controllers.AuthController.class);
+        resources.add(com.roi.authentication.auth.AuthController.class);
     }
     
 }

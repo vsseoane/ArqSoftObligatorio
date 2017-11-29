@@ -1,5 +1,5 @@
 
-package com.roi.planner.planes;
+package com.roi.supplying.orders;
 
 public class OrderNotValidException extends Exception {
     public OrderNotValidException() { 

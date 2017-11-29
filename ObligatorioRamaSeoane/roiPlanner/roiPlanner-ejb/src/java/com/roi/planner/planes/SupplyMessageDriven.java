@@ -12,10 +12,11 @@ import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
 
 @MessageDriven(activationConfig = {
-    @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "jms/SupplyingQueue")
-    ,
-        @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue")
-})
+    @ActivationConfigProperty(propertyName = "destinationLookup", 
+            propertyValue = "jms/SupplyingQueue"),
+        @ActivationConfigProperty(propertyName = "destinationType", 
+                propertyValue = "javax.jms.Queue")
+    })
 public class SupplyMessageDriven implements MessageListener {
     @EJB
     private PlanBean planBean;
@@ -28,20 +29,22 @@ public class SupplyMessageDriven implements MessageListener {
         try {
             Gson gson = new Gson();
             ObjectMessage obj = (ObjectMessage) message;
-            String jsonRequestDTO = obj.getObject().toString();
-            RequestDTO requestDTO = gson.fromJson(jsonRequestDTO, RequestDTO.class);
-            Order order = requestDTO.getOrder();
-            String action = requestDTO.getMessage();
-            if(action.equals("CREATE")){
+            String jsonRequestDto = obj.getObject().toString();
+            RequestDto requestDto = gson.fromJson(jsonRequestDto, RequestDto.class);
+            Order order = requestDto.getOrder();
+            String action = requestDto.getMessage();
+            if (action.equals("CREATE")) {
                 planBean.createPlanFromOrder(order);
             }
-            if(action.equals("UPDATE")){
+            if (action.equals("UPDATE")) {
                 planBean.updatePlanFromOrder(order);
             }
-            if(action.equals("DELETE")){
+            if (action.equals("DELETE")) {
                 planBean.deletePlanFromOrder(order);
             }
-        } catch (Exception ex) {
+        } catch (OrderNotFoundException ex) {
+            Logger.getLogger(SupplyMessageDriven.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JMSException ex) {
             Logger.getLogger(SupplyMessageDriven.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

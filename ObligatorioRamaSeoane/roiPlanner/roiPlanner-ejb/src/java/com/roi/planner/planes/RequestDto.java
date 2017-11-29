@@ -1,9 +1,8 @@
 package com.roi.planner.planes;
 
-import com.roi.planner.planes.Order;
 import java.io.Serializable;
 
-public class RequestDTO implements Serializable  {
+public class RequestDto implements Serializable  {
     Order order;
     String message;
 

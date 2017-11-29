@@ -2,10 +2,6 @@ package com.roi.goliath.device;
 
 import java.io.Serializable;
 
-/**
- *
- * @author Alejandro
- */
 public class CommandValue implements Serializable {
 
     private String command;

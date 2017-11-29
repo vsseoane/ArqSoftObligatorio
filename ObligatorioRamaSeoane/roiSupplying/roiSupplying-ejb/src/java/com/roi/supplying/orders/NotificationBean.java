@@ -1,4 +1,4 @@
-package com.supplying.orders;
+package com.roi.supplying.orders;
 
 import com.google.gson.Gson;
 import java.util.logging.Level;
@@ -25,18 +25,18 @@ public class NotificationBean {
     private Queue queue;
     
     
-     public void sendOrderQueueNotification(RequestDTO requestDTO){
-        try{
+    public void sendOrderQueueNotification(RequestDto requestDto) {
+        try {
             Connection connection = connectionFactory.createConnection();
             Session session = connection.createSession();
             Gson gson = new Gson();
-            String gsonRequestDTO = gson.toJson(requestDTO);
-            ObjectMessage msg = session.createObjectMessage(gsonRequestDTO);
+            String gsonRequestDto = gson.toJson(requestDto);
+            ObjectMessage msg = session.createObjectMessage(gsonRequestDto);
             MessageProducer producer = session.createProducer(queue);
             producer.send(msg);
             session.close();
             connection.close();
-        }catch(JMSException e){
+        } catch (JMSException e) {
             Logger.getLogger(OrderBean.class.getName()).log(Level.SEVERE, null, e);
         }
     }

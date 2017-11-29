@@ -5,10 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-/**
- *
- * @author Alejandro
- */
+
 @Entity
 public class Device implements Serializable {
 

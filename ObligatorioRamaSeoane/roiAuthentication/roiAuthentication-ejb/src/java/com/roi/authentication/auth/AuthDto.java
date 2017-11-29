@@ -1,16 +1,13 @@
 package com.roi.authentication.auth;
 
-
-
-
-public class AuthDTO {
-    
-    public AuthDTO(){
-        
-    }
+public class AuthDto {
     private String token1;
     private String token2;
+    
+    public AuthDto() {
+    }
 
+  
     public String getToken1() {
         return token1;
     }

@@ -1,7 +1,5 @@
-
 package com.roi.planner.programmer;
 
-import com.roi.planner.planes.Plan;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,13 +10,11 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Command implements Serializable {
-
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String Name;
-    private String TypeValueCommand;
+    private String name;
+    private String typeValueCommand;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private ActuatorProgramming actuatorProgramming;
@@ -32,21 +28,18 @@ public class Command implements Serializable {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getTypeValueCommand() {
-        return TypeValueCommand;
+        return typeValueCommand;
     }
 
-    public void setTypeValueCommand(String TypeValueCommand) {
-        this.TypeValueCommand = TypeValueCommand;
+    public void setTypeValueCommand(String typeValueCommand) {
+        this.typeValueCommand = typeValueCommand;
     }
-    
-    
-    
 }

@@ -5,18 +5,13 @@ import javax.ejb.LocalBean;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-/**
- *
- * @author Alejandro
- */
 @Stateless
 @LocalBean
 public class DeviceBean {
 
-    //private static final Logger LOG = LoggerFactory.getLogger(DeviceBean.class);
+    //private static final Logger LOG = LoggerFactory.getLogger
+    //(DeviceBean.class);
 
     @PersistenceContext
     private EntityManager em;
@@ -33,13 +28,14 @@ public class DeviceBean {
         return device;
     }
 
-    public void ExecuteCommand(DeviceScheduleDto deviceCommandDto) {
+    public void executeCommand(DeviceScheduleDto deviceCommandDto) {
         //LOG.debug("Executing command!");
         // get device from the DB
         Device device = this.findDeviceById(deviceCommandDto.getActuatorId());
         // obtain library proxy
-        DeviceLibraryProxy libraryProxy = deviceLibraryProxyProvider.findLibraryByName(device.getName());
+        DeviceLibraryProxy libraryProxy = deviceLibraryProxyProvider
+                .findLibraryByName(device.getName());
         // run each command on library proxy instance
-        libraryProxy.executeCommands(deviceCommandDto.GetCommandsToExecute());
+        libraryProxy.executeCommands(deviceCommandDto.getCommandsToExecute());
     }
 }

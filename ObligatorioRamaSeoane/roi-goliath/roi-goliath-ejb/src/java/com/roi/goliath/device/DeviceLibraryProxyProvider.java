@@ -23,10 +23,12 @@ public class DeviceLibraryProxyProvider {
 
     private static final int CLASS_EXT_LENGTH = ".class".length();
 
-    private final Map<String, DeviceLibraryProxy> libraryProxyCache = new HashMap<>();
+    private final Map<String, DeviceLibraryProxy> libraryProxyCache = 
+            new HashMap<>();
 
     public DeviceLibraryProxy findLibraryByName(String name) {
-        // populating library cache to avoid class loading conflicts on next invokations
+        // populating library cache to avoid class loading conflicts on next 
+        //invokations
         if (!libraryProxyCache.containsKey(name)) {
             libraryProxyCache.put(name, loadLibraryFromJar(name));
         }
@@ -40,12 +42,14 @@ public class DeviceLibraryProxyProvider {
         String pathToJar = "D:/temp/" + name + JAR_EXT;
         
         if (!new File(pathToJar).exists()) {
-            throw new IllegalArgumentException(String.format("Library [%s] is not found!", name));
+            throw new IllegalArgumentException(String.format("Library [%s] "
+                    + "is not found!", name));
         }
 
         URL[] urls = {createUrl("jar:file:" + pathToJar + "!/")};
         // url classloader that loads classes by url
-        URLClassLoader cl = URLClassLoader.newInstance(urls, getClass().getClassLoader());
+        URLClassLoader cl = URLClassLoader.newInstance(urls, getClass()
+                .getClassLoader());
 
         JarFile jar = openJar(pathToJar);
         Class mainClass = loadClassFromJar(jar, cl, BASE_PACKAGE_NAME + name);
@@ -56,28 +60,30 @@ public class DeviceLibraryProxyProvider {
         return new DeviceLibraryProxy(ClassUtils.newInstance(mainClass));
     }
 
-    private Class loadClassFromJar(JarFile file, URLClassLoader cl, String mainClassName) {
+    private Class loadClassFromJar(JarFile file, URLClassLoader cl, 
+            String mainClassName) {
         Class mainClass = null;
-        Enumeration<JarEntry> e = file.entries();
-        while (e.hasMoreElements()) {
-            JarEntry je = e.nextElement();
+        Enumeration<JarEntry> entriesFile = file.entries();
+        while (entriesFile.hasMoreElements()) {
+            JarEntry je = entriesFile.nextElement();
             if (je.isDirectory() || !je.getName().endsWith(".class")) {
                 continue;
             }
-            String className = je.getName().substring(0, je.getName().length() - CLASS_EXT_LENGTH);
+            String className = je.getName().substring(0, je.getName().length() 
+                    - CLASS_EXT_LENGTH);
             className = className.replace('/', '.');
 
-            Class c = ClassUtils.loadClass(className, cl);
+            Class classObtain = ClassUtils.loadClass(className, cl);
             if (className.equals(mainClassName)) {
-                mainClass = c;
+                mainClass = classObtain;
             }
         }
         return mainClass;
     }
 
-    private void safeClose(Closeable c) {
+    private void safeClose(Closeable closeableElement) {
         try {
-            c.close();
+            closeableElement.close();
         } catch (IOException ex) {
             throw new IllegalStateException(ex);
         }

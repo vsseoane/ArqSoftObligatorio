@@ -4,10 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Alejandro
- */
 public class PlanInstrucionsDto implements Serializable {
 
     private int idPlan;

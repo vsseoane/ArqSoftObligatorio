@@ -1,15 +1,28 @@
-package com.roi.planner.planes;
+package com.roi.supplying.orders;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
 
-
-public class Order implements Serializable {
-
+/**
+ *
+ * Order is the class to persist
+ */
+@Entity
+@Table(name = "Orders")
+public class Order implements Serializable{
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO) 
     private int orderNumber;
     
     private int clientNumber;
     
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date startDate;
     
     private int requestedVolume;

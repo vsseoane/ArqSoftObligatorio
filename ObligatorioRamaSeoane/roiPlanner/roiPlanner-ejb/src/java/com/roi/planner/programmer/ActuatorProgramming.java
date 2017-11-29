@@ -1,6 +1,5 @@
 package com.roi.planner.programmer;
 
-import com.roi.planner.stretches.Stretch;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,27 +12,24 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class ActuatorProgramming implements Serializable {
-
-   // private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    
-    private int planID;
-
-    public int getPlanId() {
-        return planID;
-    }
-
-    public void setPlanID(int planID) {
-        this.planID = planID;
-    }
-    
+    private int id;    
+    private int planId;
     private String actuatorId;
     
-   @OneToMany(cascade = CascadeType.PERSIST)
-   private List<CommandValue> commands  = new ArrayList<>();
-
+    @OneToMany (cascade = CascadeType.PERSIST)
+    private List<CommandValue> commands  = new ArrayList<>();
+    
+    public int getPlanId() {
+        return planId;
+    }
+    
+    public void setPlanId(int planId) {
+        this.planId = planId;
+    }
+    
     public String getActuatorId() {
         return actuatorId;
     }

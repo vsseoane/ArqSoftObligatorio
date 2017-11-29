@@ -6,13 +6,13 @@ import java.util.List;
 
 
 public class ActuatorProgrammingRequest implements Serializable {
-    
-    public ActuatorProgrammingRequest(){
-        
-    }
     private List<ActuatorProgramming> actuatorProgamming;
     private Long idPlan;
-
+    
+    public ActuatorProgrammingRequest() {
+        
+    }
+    
     public List<ActuatorProgramming> getActuatorProgamming() {
         return actuatorProgamming;
     }
