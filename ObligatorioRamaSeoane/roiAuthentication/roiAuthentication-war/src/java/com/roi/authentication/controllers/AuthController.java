@@ -46,10 +46,18 @@ public class AuthController {
                     .entity("")
                     .build();
         }
-        return Response
-                    .status(Response.Status.OK)
-                    .entity("hasPermission")
-                    .build();
+        
+        if(hasPermission){
+            return Response
+                        .status(Response.Status.OK)
+                        .entity("hasPermission")
+                        .build();
+        }else{
+            return Response
+                        .status(Response.Status.UNAUTHORIZED)
+                        .entity("hasPermission")
+                        .build();
+        }
     }
         
 

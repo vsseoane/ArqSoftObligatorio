@@ -17,7 +17,7 @@ public class ActuatorProgrammingBean {
     protected EntityManager em;
    
     public void actuatorProgramming(ActuatorProgramming actuatorProgramming) throws ActuatorNotFoundException{
-        boolean existsActuator = existActuator(actuatorProgramming.getActuatorId());
+        boolean existsActuator = existActuator(actuatorProgramming.getPlanId(),actuatorProgramming.getActuatorId());
         boolean isValid = validateCommands(actuatorProgramming.getCommands());
         if(isValid && existsActuator){
             addPlan(actuatorProgramming);
@@ -58,10 +58,10 @@ public class ActuatorProgrammingBean {
     public boolean isTypeValid(CommandValue aCommandValue){
        return true;
     }
-    public boolean existActuator(String actuatorId){
+    public boolean existActuator(int planId, String actuatorId){
        boolean exist = false;
         try{
-            ActuatorProgramming actuator = this.find(actuatorId);
+            ActuatorProgramming actuator = this.find(planId,actuatorId);
             if(actuator != null)
                 exist = true;
         }catch(ActuatorNotFoundException e){
@@ -72,10 +72,10 @@ public class ActuatorProgrammingBean {
         }
         return exist;
     }
-      public ActuatorProgramming find(String id) throws ActuatorNotFoundException{
+      public ActuatorProgramming find(int planId, String id) throws ActuatorNotFoundException{
        try{
         ActuatorProgramming actuatorProgramming =  (ActuatorProgramming)
-                em.createNativeQuery("SELECT * FROM PLANS as p, PLANS_STRETCH as ps, STRETCH as s where p.ID= ps.PLAN_ID and s.ID = ps.STRETCHES_ID\n" +
+                em.createNativeQuery("SELECT * FROM PLANS as p, PLANS_STRETCH as ps, STRETCH as s where p.ID = "+planId+" and p.ID= ps.PLAN_ID and s.ID = ps.STRETCHES_ID\n" +
                                 "and p.ISAPPROVED = 1 and s.ACTUATORID ='" +id + "'",ActuatorProgramming.class).
                         getResultList().get(0);
         return actuatorProgramming;

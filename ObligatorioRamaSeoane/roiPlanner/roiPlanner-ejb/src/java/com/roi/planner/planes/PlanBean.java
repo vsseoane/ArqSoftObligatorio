@@ -149,7 +149,7 @@ public class PlanBean {
         ActuatorProgrammingRequest request = new ActuatorProgrammingRequest();
         request.setIdPlan(plan.getID());
         request.setActuatorProgamming(actuatorProgramming);
-        restBean.postMethod("https://requestb.in/x12q7mx1", request);
+        restBean.postMethod("http://localhost:8080/roi-goliath-war/api/device", request);
         
         
         

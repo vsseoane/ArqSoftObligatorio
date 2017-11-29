@@ -18,6 +18,17 @@ public class ActuatorProgramming implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    
+    private int planID;
+
+    public int getPlanId() {
+        return planID;
+    }
+
+    public void setPlanID(int planID) {
+        this.planID = planID;
+    }
+    
     private String actuatorId;
     
    @OneToMany(cascade = CascadeType.PERSIST)

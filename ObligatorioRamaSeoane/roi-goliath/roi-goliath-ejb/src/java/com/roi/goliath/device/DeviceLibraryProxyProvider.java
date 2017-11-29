@@ -33,15 +33,12 @@ public class DeviceLibraryProxyProvider {
         return libraryProxyCache.get(name);
     }
 
-    /**
-     * Loads library classes to the memory and creates main class (<DeviceName>.class) object.
-     *
-     * @param name
-     * @return proxy to be used
-     */
-    private DeviceLibraryProxy loadLibraryFromJar(String name) {
-        String pathToJar = "D:/temp/" + name + JAR_EXT;
 
+    private DeviceLibraryProxy loadLibraryFromJar(String name) {
+        //we know it should be set on a config file, but just for the prototype
+        //purposes we hardcoded it here, this decision was documented.
+        String pathToJar = "D:/temp/" + name + JAR_EXT;
+        
         if (!new File(pathToJar).exists()) {
             throw new IllegalArgumentException(String.format("Library [%s] is not found!", name));
         }
@@ -102,11 +99,7 @@ public class DeviceLibraryProxyProvider {
         }
     }
 
-    /**
-     * Checks whether method {@link DeviceLibraryProxy#DEVICE_LIBRARY_EXEC_METHOD} exists.
-     *
-     * @param claz
-     */
+
     private void validateLibraryMethod(Class claz) {
         ClassUtils.getMethod(claz,
                 DeviceLibraryProxy.DEVICE_LIBRARY_EXEC_METHOD,

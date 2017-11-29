@@ -44,20 +44,6 @@ public class PlanController {
     public Response getJson() {
          try {
             final List<Plan> plans = planBean.getPlans();
-            Gson gson = new Gson();
-            final String JSONRepresentation = gson.toJson(plans);
-            return Response.status(Response.Status.OK).entity(JSONRepresentation).build(); 
-        } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Hubo un error al realizar su solicitud").build();
-        }
-    }
-    @GET
-    @Path("/programmer")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getPlanFromProgrammer() {
-         try {
-            final List<Plan> plans = planBean.getPlansFromProgrammer();
-            Gson gson = new Gson();
             final String JSONRepresentation = gson.toJson(plans);
             return Response.status(Response.Status.OK).entity(JSONRepresentation).build(); 
         } catch (Exception e) {
