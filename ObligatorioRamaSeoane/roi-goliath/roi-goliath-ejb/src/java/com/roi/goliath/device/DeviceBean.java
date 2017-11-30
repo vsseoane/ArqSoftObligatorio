@@ -5,6 +5,8 @@ import javax.ejb.LocalBean;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Stateless
 @LocalBean
@@ -28,7 +30,7 @@ public class DeviceBean {
         return device;
     }
 
-    public void ExecuteCommand(DeviceScheduleDto deviceCommandDto) {
+    public void executeCommand(DeviceScheduleDto deviceCommandDto) {
         LOG.debug("Executing command!");
         // get device from the DB
         Device device = this.findDeviceById(deviceCommandDto.getActuatorId());

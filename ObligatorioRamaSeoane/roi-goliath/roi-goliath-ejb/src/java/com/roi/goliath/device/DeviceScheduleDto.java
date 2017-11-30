@@ -7,7 +7,15 @@ import java.util.List;
 public class DeviceScheduleDto implements Serializable {
 
     private String actuatorId;
+    private int planId;
 
+    public int getPlanId() {
+        return planId;
+    }
+
+    public void setPlanId(int planId) {
+        this.planId = planId;
+    }
     private List<CommandValue> commands;
 
     public DeviceScheduleDto() {

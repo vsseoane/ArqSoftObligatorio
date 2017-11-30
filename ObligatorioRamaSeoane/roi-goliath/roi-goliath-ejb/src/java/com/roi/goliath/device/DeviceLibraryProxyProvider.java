@@ -39,7 +39,7 @@ public class DeviceLibraryProxyProvider {
     private DeviceLibraryProxy loadLibraryFromJar(String name) {
         //we know it should be set on a config file, but just for the prototype
         //purposes we hardcoded it here, this decision was documented.
-        String pathToJar = "D:/temp/" + name + JAR_EXT;
+        String pathToJar = "C:/temp/" + name + JAR_EXT;
         
         if (!new File(pathToJar).exists()) {
             throw new IllegalArgumentException(String.format("Library [%s] "
